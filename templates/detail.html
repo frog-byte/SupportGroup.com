@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load hitcount_tags %}
+{% block content %}
+    <div class="container">
+        <!--Navigation-->
+        <div class="navigate" style="margin-top: 6%;">
+            <span><a href="{% url 'home' %}">MyForum - Forums</a><i class="fa fa-paper-plane"></i><a href="{{post.categories.all.0.get_url}}">{{post.categories.all.0}}</a><i class="fa fa-paper-plane"></i><a href="{{post.get_url}}">{{post.title}}</a></span>
+        </div>
+
+         <!--Topic Section-->
+         <div class="topic-container">
+            <!--Original thread-->
+            <div class="head" style="border-radius: 10px;">
+                <div class="authors">Author</div>
+                <div class="content">Topic: {{post.title}} (Read {% get_hit_count for post %} Times)</div>
+            </div>
+
+            <div class="body border-dark border" style="border-radius: 10px;">
+                <div class="authors">
+                    <div class="username" style="font-size: medium;"><a href="">{{post.user.fullname|title}}</a></div>
+                    <img src="{{post.user.profile_pic.url}}" alt="" style="border-radius: 50px; border:solid #555">
+                    <div><b>Posts: {{comment.user.num_posts}}</b></div>
+                    <div><b>Points: {{comment.user.points}}</b></div>
+                </div>
+                <div class="content">
+                    {{post.content|safe}}
+                    <div class="comment">
+                        <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#comment-area" aria-expanded="false" aria-controls="comment-area">
+                            comment
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Comment Area-->
+        {% if request.user.is_authenticated %}
+        <form action="." method="post">
+            {% csrf_token %}
+            <div class="collapse" id="comment-area" style="border-radius: 10px;">
+                <textarea name="comment" id="" placeholder="comment here ... "></textarea>
+                <input type="submit" value="submit" name="comment-form">
+            </div>
+        </form>
+        {% else %}
+        <div style="background-color:#fff;color:#000;font-weight:bolder;padding:20px;width:100%;"> You need to <a href="{% url 'signin' %}"><b>login</b></a> to comment or reply! </div>
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+              <img src="..." class="rounded me-2" alt="...">
+              <strong class="me-auto">Bootstrap</strong>
+              <small>11 mins ago</small>
+              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                You need to <a href="{% url 'signin' %}"><b>login</b></a> to comment or reply!
+            </div>
+          </div>      
+
+        {% endif %}
+
+        <!--Comments Section-->
+
+        {% for comment in post.comments.all %}
+        <div class="comments-container">
+            <div class="body border-dark border" style="border-radius: 10px;">
+                <div class="authors">
+                    <div class="username" style="font-size: medium;"><a href="">{{comment.user.fullname|title}}</a></div>
+                    <img src="{{comment.user.profile_pic.url}}" alt="" style="border-radius: 50px;">
+                    
+                </div>
+                <div class="content">
+                    {{comment.content}}
+                    <br>
+                    {% if request.user.is_authenticated %}
+                    <div class="comment">
+                        <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#comment{{comment.id}}" aria-expanded="false" aria-controls="comment{{comment.id}}">
+                            Reply
+                        </button>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <!--Reply Area-->
+        <form action="." method="post">
+            {% csrf_token %}
+            <div class="collapse" id="comment{{comment.id}}" style="border-radius: 10px;">
+                <textarea name="reply" id="" placeholder="reply here ... "></textarea>
+                <input type="submit" value="submit" name="reply-form">
+                <input type="hidden" name="comment-id" value="{{comment.id}}">
+            </div>
+        </form>
+        
+        <!--Reply section-->
+        {% for reply in comment.replies.all %}
+        <div class="comments-container" style="width: 95%; margin-left:5%; border-radius: 10px;">
+            <div class="body border-dark border" style="border-radius: 20px;">
+                <div class="authors">
+                    <div class="username" style="font-size: medium;"><a href="">{{reply.user.fullname|title}}</a></div>
+                    <img src="{{reply.user.profile_pic.url}}" alt="" style="border-radius: 50px;">
+                </div>
+                <div class="content">
+                    {{reply.content}}
+                    <br> 
+                </div>
+            </div>
+        </div>
+        {% endfor %} 
+        {% endfor %}
+
+        
+
+    </div>
+    <!--Forum info-->
+    {% endblock content %}
