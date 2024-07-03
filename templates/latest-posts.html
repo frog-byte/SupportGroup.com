@@ -13,11 +13,9 @@
                 <div class="subjects">Subjects</div>
                 <div class="replies">Replies/Views</div>
                 <div class="last-reply">Last Reply</div>
-            </div>
-
-            
+            </div>           
             {% for post in posts %}
-            <div class="table-row">
+            <div class="table-row m-2">
                 <div class="status"><i class="fa fa-fire"></i></div>
                 <div class="subjects">
                     <a href="{{post.get_url}}">{{post.title}}</a>
@@ -25,7 +23,7 @@
                     <span>Started by <b><a href="">{{post.user.fullname|title}}</a></b> .</span>
                 </div>
                 <div class="replies">
-                    {{post.num_comments}} comments <br> {% get_hit_count for post %} views
+                    {{post.num_comments}} <i class="fa fa-comment"></i> <br> {% get_hit_count for post %} <i class="fa fa-eye"></i>
                 </div>
 
                 <div class="last-reply">

@@ -121,6 +121,7 @@ h1{
 .container{
     margin: 20px;
     padding: 20px;
+    /*background-image: url("media\imgaes\background.jpg");*/
     
 }
 
@@ -208,7 +209,7 @@ h1{
         justify-content: space-around;
         border-radius: 10px;
         border-bottom: 1px solid #ccc; /* Add border bottom for divider line */
-        background-color: #dfe3eb; /* Set default background color */
+        background-color: #ffffff; /* Set default background color */
     }
     
     .table-row .status,
@@ -220,7 +221,7 @@ h1{
     }
 
     .table-row {
-        background-color: transparent;
+        background-color: none;
     }
 
     .collapse {
@@ -304,6 +305,7 @@ footer {
 
 /* posts table's head  */
 /* posts table's head  */
+
 .table-head{
     display: flex;
     background-color: #563d7c;
