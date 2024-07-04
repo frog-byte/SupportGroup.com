@@ -18,8 +18,11 @@ packaging==24.0
 pillow==10.3.0
 platformdirs==4.2.0
 psycopg2==2.9.9
+<<<<<<< HEAD
 python-decouple==3.8
 python-dotenv==1.0.1
+=======
+>>>>>>> parent of f69f86b (only changes)
 sqlparse==0.4.4
 termcolor==2.4.0
 termcolors==0.1.0

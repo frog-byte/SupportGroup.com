@@ -13,7 +13,9 @@
                 <div class="subjects">Subjects</div>
                 <div class="replies">Replies/Views</div>
                 <div class="last-reply">Last Reply</div>
-            </div>           
+            </div>
+
+            
             {% for post in objects %}
             <div class="table-row">
                 <div class="status"><i class="fa fa-fire"></i></div>
@@ -40,4 +42,8 @@
             </div>
         <!--pagination ends-->
     </div>
+
+    
+    
+    <!--Forum info-->
     {% endblock content %} 
