@@ -4,7 +4,7 @@
     <div class="container">
         <!--Navigation-->
         <div class="navigate" style="margin-top: 6%;">
-            <span><a href="{% url 'home' %}">MyForum - Forums</a><i class="fa fa-paper-plane"></i><a href="{{post.categories.all.0.get_url}}">{{post.categories.all.0}}</a><i class="fa fa-paper-plane"></i><a href="{{post.get_url}}">{{post.title}}</a></span>
+            <span><a href="{% url 'home' %}">Forums</a><i class="fa fa-paper-plane"></i><a href="{{post.categories.all.0.get_url}}">{{post.categories.all.0}}</a><i class="fa fa-paper-plane"></i><a href="{{post.get_url}}">{{post.title}}</a></span>
         </div>
 
          <!--Topic Section-->
